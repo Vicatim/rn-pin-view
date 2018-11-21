@@ -1,70 +1,40 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated, FlatList } from 'react-native';
 
-export default PinScreen = () => {
-
-	let pin = [];
-	let pinRender = [];
-	createPinElement = ( element ) => {
-		return(
-			<View style={{margin: 5,}}>
-				<Text style={{fontSize: 22}}
-				onPress={() => deletePinElement()}
-				
-				>{element}</Text>
-			</View>
-		)
-	}
-
-	createPinConstruct = (pinLength) => {
-
-			for (pinLength; pinLength > 0; pinLength--) {
-				pin.push("T");
-				pinRender.push( createPinElement("T") )
-			}
-			return (
-				<View
-				style={{flexDirection: "row",justifyContent: 'center', 
-				alignItems: 'center',}}
-				>
-					{pinRender}
-				</View>
-			)
-			
-	}
-
-	addPinElement = () => {
-		for (let index = 0; index < pin.length; index++) {
-			if (pin[index] == "T" ) {
-				pinRender[index] = createPinElement("P");
-				pin[index] = "P";
-				console.warn(pin);
-				break;
-			}	
-		}
-		return ( pin );
-	}
-
-	deletePinElement = () => {
-		for (let index = pin.length -1 ; index >= 0; index-- ) {
-			if (pin[index] !== "T" ) {
-				pinRender[index] = createPinElement("T");
-				pin[index] = "T";
-				console.warn(pin);
-				break;
-			}	
-		}
-		return ( pin );
-	}
-
-	return (
-
-		<View>
-			{createPinConstruct(8)}
-			<Text onPress={() => addPinElement()}
-			>pindwqwdqwdw</Text>
+const PinElement = ( { item, index, secure} ) => {
+	let char = "_";
+	let result = (secure == true && item !== char) ? "•" : item;
+	return(
+		<View style={{margin: 5,}}>
+			<Text style={{fontSize: 22}}
+			>{ result }</Text>
 		</View>
-	);
+	)
+};
 
+export default PinScreen = ( { pinCode, pinLength, secure } ) => {
+	return (
+		<View>
+			<View
+			style={{flexDirection: "row",justifyContent: 'center', 
+			alignItems: 'center',}}
+			>
+				<FlatList 
+					scrollEnabled={ false }
+					horizontal={ false }
+					vertical={ true }
+					numColumns={ pinLength }
+					data={ pinCode }
+					renderItem={({item, index}) => <PinElement 
+						item={item}
+						index={index}
+						secure={secure}
+					/> }
+					columnWrapperStyle={{justifyContent: "center",}}
+				/>
+			</View>
+			<Text>pindwqwdqwdw</Text>
+		</View>
+	);	
 } 

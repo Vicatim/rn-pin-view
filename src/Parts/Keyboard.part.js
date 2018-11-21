@@ -2,46 +2,24 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Dimensions, TouchableHighlight, TouchableWithoutFeedback} from 'react-native';
 
+const NumeralElement = ( { item, index, onPress } ) => {
+	console.log('g item', item);
+	console.log('g index', index);
+	return (
+		<View style={styles.keyContainer}>
+			<TouchableHighlight
+				style={styles.touch} 
+				onPress={() => onPress( item )}
+				underlayColor={"orange"}>
+				<Text style={styles.fontSize}>
+					{ item }
+				</Text>
+			</TouchableHighlight>
+		</View>
+	)
+};
 
-export default Keyboard = () => {
-	let data = [1,2,3,4,5,6,7,8,9, "del", 0, "show" ];	
-
-	onPress = ( element ) => {
-		if (element == "del") {
-			this.deleteItem();
-		} else if (element == "show") {
-			this.showInput();
-		} else {
-			this.pushItem(element);
-		}
-	}
-	
-	deleteItem = () => {
-		console.warn("minus");
-	}
-
-	showInput = () => {
-		console.warn("open");
-	}
-
-	pushItem = (element) => {
-		console.warn(element);	
-	}
-
-	numeralElement = ({ item, index }) => {
-		return (
-			<View style={styles.keyContainer}>
-				<TouchableHighlight
-					style={styles.touch} 
-					onPress={() => this.onPress( item )}	
-					underlayColor={"orange"}>
-					<Text style={styles.fontSize}>
-						{ item }
-					</Text>
-				</TouchableHighlight>
-			</View>
-		)
-	}
+export default Keyboard = ( {data, onPress} ) => {
 	return (
 		<View style={styles.container}>
 			<FlatList 
@@ -50,11 +28,12 @@ export default Keyboard = () => {
 				vertical={ true }
 				numColumns={ 3 }
 				data={ data }
-				renderItem={ numeralElement }
+				renderItem={({index, item}) => <NumeralElement 
+					onPress={onPress} 
+					item={item}
+					index={index}/>}
 				columnWrapperStyle={{justifyContent: "space-around",}}
-
 			/>
-
 		</View>
 	);
 }

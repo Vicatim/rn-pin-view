@@ -3,19 +3,15 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 
 import PinCode from "./src/PinCode";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to relowefad,\n' + 'Cmd+D or shwefeeake for dev menu',
-  android:
-    'Double tap R on your kwefeyboard to reload,\n' +
-    'Shake or press menu buttwefon for dev menu',
-});
-
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>     
-          <PinCode />
+          <PinCode 
+            data = {[1,2,3,4,5,6,7,8,9,"DEL",0,"SHOW"]}
+            
+          />
       </View>
     );
   }
