@@ -12,7 +12,7 @@ export default class PinCode extends Component {
     constructor(props){
         super(props);
         this.state = {
-            pinCode: new Array(this.props.pinLength).fill("_"),
+            pinCode: new Array(this.props.pinLength).fill(this.props.emptyFill),
             secure: true,
             savedPin: this.props.savedPin,
         };
@@ -31,9 +31,9 @@ export default class PinCode extends Component {
     // DEL Button
     deleteItem = () => {
         for (let index = this.state.pinCode.length - 1; index >= 0 ; index--) {
-            if(this.state.pinCode[index] !== "_"){
+            if(this.state.pinCode[index] !== this.props.emptyFill){
                 let pin = this.state.pinCode;
-                pin[index] = "_";
+                pin[index] = this.props.emptyFill;
                 this.setState({
                     pinCode: pin,
                 });
@@ -51,7 +51,7 @@ export default class PinCode extends Component {
     // any Activity Button
     pushItem = (element) => {
         for (let index = 0; index < this.state.pinCode.length; index++) {
-            if(this.state.pinCode[index] == "_"){
+            if(this.state.pinCode[index] == this.props.emptyFill){
                 let pin = this.state.pinCode;
                 pin[index] = element;
                 this.setState({
@@ -64,21 +64,13 @@ export default class PinCode extends Component {
     
     matchPin = () => {
         if ( this.props.savedPin.length === this.state.pinCode.length 
-            && this.state.pinCode[this.state.pinCode.length - 1] !== "_") {
-                this.arrayEquels(this.props.savedPin, this.state.pinCode) ? this.onSuccess() : this.onFailure();
+            && this.state.pinCode[this.state.pinCode.length - 1] !== this.props.emptyFill) {
+                this.arraysEquel(this.props.savedPin, this.state.pinCode) ? this.props.onSuccess() : this.props.onFailure();
         } 
 
     }
 
-    onSuccess = () => {
-        console.warn("richtig");
-    }
-
-    onFailure = () => {
-        console.warn("falsch");   
-    }
-
-    arrayEquels = (a, b) => {
+    arraysEquel = (a, b) => {
         if (a === b) return true;
         if (a == null || b == null) return false;
         if (a.length != b.length) return false;
@@ -95,6 +87,7 @@ export default class PinCode extends Component {
                 <PinScreen 
                     pinCode={this.state.pinCode}
                     secure={this.state.secure}
+                    secureFill={this.props.secureFill}
                 />
                 <Keyboard 
                     data={this.props.data}

@@ -16,8 +16,9 @@ export default class App extends Component<Props> {
             pinLength={5}
             savedPin= {[1,1,1,1,1]}
             emptyFill= {"_"}
-            onSuccess={ () => console.warn("123")}
-            onFailure={ () => console.warn("345")}
+            secureFill={"•"}
+            onSuccess={ () => console.warn("123") }
+            onFailure={ () => console.warn("345") }
           />
       </View>
     );
