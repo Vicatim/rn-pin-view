@@ -1,16 +1,17 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, TouchableHighlight, TouchableWithoutFeedback} from 'react-native';
+import { View, Text, FlatList, TouchableHighlight, } from 'react-native';
+
+//import Style
+import { defaultStyles as styles } from "../Styles/default.style"
 
 const NumeralElement = ( { item, index, onPress } ) => {
-	console.log('g item', item);
-	console.log('g index', index);
 	return (
 		<View style={styles.keyContainer}>
 			<TouchableHighlight
 				style={styles.touch} 
 				onPress={() => onPress( item )}
-				underlayColor={"orange"}>
+				underlayColor={styles.container.backgroundColor}>
 				<Text style={styles.fontSize}>
 					{ item }
 				</Text>
@@ -21,7 +22,7 @@ const NumeralElement = ( { item, index, onPress } ) => {
 
 export default Keyboard = ( {data, onPress} ) => {
 	return (
-		<View style={styles.container}>
+		<View style={styles.keyboardContainer}>
 			<FlatList 
 				scrollEnabled={ false }
 				horizontal={ false }
@@ -32,30 +33,10 @@ export default Keyboard = ( {data, onPress} ) => {
 					onPress={onPress} 
 					item={item}
 					index={index}/>}
-				columnWrapperStyle={{justifyContent: "space-around",}}
+				columnWrapperStyle={styles.keyboardListWrapper}
 			/>
 		</View>
 	);
 }
 
-const styles = StyleSheet.create({
-	container: {
-		justifyContent: 'center', 
-		alignItems: 'center',
-	},
-	keyContainer: {
-		width: "27%",
-		aspectRatio: 1,
-		margin: 3,
-		backgroundColor: 'rgba(0, 0, 0, 0.1)',
-		borderRadius: 100,
-	},
-	touch: {
-		flex: 1, 
-		justifyContent: 'center', 
-		alignItems: 'center',
-	},
-	fontSize: {
-		fontSize: 27,
-	},
-});
+

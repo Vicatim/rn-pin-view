@@ -1,32 +1,34 @@
 //import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 
 import PinScreen from "./Parts/PinScreen.part"
 import Keyboard from "./Parts/Keyboard.part"
 
-// create a component
-
-let currentPin = [5,6,3,7,4,7];
-let pinLength = 6;
+// import Style
+import { defaultStyles as styles } from "./Styles/default.style"
 
 export default class PinCode extends Component {
     constructor(props){
         super(props);
         this.state = {
-            pinCode: new Array(pinLength).fill("_"),
+            pinCode: new Array(this.props.pinLength).fill("_"),
             secure: true,
+            savedPin: this.props.savedPin,
         };
     }
-    onPressNumeral = ( element ) => {
+    // Activitiy
+    onPressActivity = ( element ) => {
         if (element == "DEL") {
             this.deleteItem();
         } else if (element == "SHOW") {
             this.showInput();
         } else {
             this.pushItem(element);
+            this.matchPin();
         }
     }
+    // DEL Button
     deleteItem = () => {
         for (let index = this.state.pinCode.length - 1; index >= 0 ; index--) {
             if(this.state.pinCode[index] !== "_"){
@@ -39,19 +41,14 @@ export default class PinCode extends Component {
             }
         }
     }
+    // SHOW Button
     showInput = () => {
         this.setState({
             secure: !this.state.secure,
         });
     }
-    check = () => {
-        for (let index = 0; index < pinLength; index++) {
-            if(this.state.pinCode[index] == null) {
 
-            }
-            
-        }
-    }
+    // any Activity Button
     pushItem = (element) => {
         for (let index = 0; index < this.state.pinCode.length; index++) {
             if(this.state.pinCode[index] == "_"){
@@ -59,79 +56,51 @@ export default class PinCode extends Component {
                 pin[index] = element;
                 this.setState({
                     pinCode: pin,
-
                 });
                 break;
             } 
         }
     }
-    render() {
+    
+    matchPin = () => {
+        if ( this.props.savedPin.length === this.state.pinCode.length 
+            && this.state.pinCode[this.state.pinCode.length - 1] !== "_") {
+                this.arrayEquels(this.props.savedPin, this.state.pinCode) ? this.onSuccess() : this.onFailure();
+        } 
 
-        const { data } = this.props;
+    }
+
+    onSuccess = () => {
+        console.warn("richtig");
+    }
+
+    onFailure = () => {
+        console.warn("falsch");   
+    }
+
+    arrayEquels = (a, b) => {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length != b.length) return false;
+
+        for (var i = 0; i < a.length; ++i) {
+          if (a[i] !== b[i]) return false;
+        }
+        return true;
+    }
+
+    render() {
         return (
             <View style={styles.container}>
                 <PinScreen 
                     pinCode={this.state.pinCode}
                     secure={this.state.secure}
-                    pinLength={pinLength}
                 />
-                <Text> leer </Text>
-                <Text> leer </Text>
-                <Text> leer </Text>
-          
                 <Keyboard 
-                    data={data}
-                    onPress={this.onPressNumeral}
+                    data={this.props.data}
+                    onPress={this.onPressActivity}
                 />
             </View>
         );
     }
 }
-
-// define your styles
-const styles = StyleSheet.create({
-    container: {
-        marginBottom: 20,
-        marginTop: 80,
-        backgroundColor: 'orange',
-    },
-});
-/** keyboard
- * 
-	
-	
-
- */
-
-/** pinview
- * 
-	addPinElement = () => {
-		for (let index = 0; index < pin.length; index++) {
-			if (pin[index] == "•" ) {
-				pinRender[index] = this.createPinElement("@");
-				this.setState({
-					viewPinCode: pinRender,
-				});
-				pin[index] = "@";
-				console.warn(pin);
-				break;
-			}	
-		}
-		return ( pin );
-	}
-
-	deletePinElement = () => {
-		for (let index = pin.length -1 ; index >= 0; index-- ) {
-			if (pin[index] !== "•" ) {
-				pinRender[index] = this.createPinElement("•");
-				this.setState({
-					viewPinCode: pinRender,
-				});
-				pin[index] = "•";
-				console.warn(pin);
-				break;
-			}	
-		}
-		return ( pin );
-	}
- */

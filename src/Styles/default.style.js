@@ -3,45 +3,55 @@ import {Dimensions, StyleSheet} from 'react-native';
 const {height, width} = Dimensions.get('window');
 
 export const defaultStyles = StyleSheet.create({
-  container: {
-    height          : 150,
-    width           : width - 30,
-    backgroundColor : '#FFF'
-  },
-  containerPin: {
-    width           : width - 30,
-    height          : 40,
-    flexDirection   : 'row',
-    justifyContent  : 'space-around',
-    alignItems      : 'center',
-    marginTop       : 20,
-  },
-  pin: {
-    backgroundColor : '#F0F0F0',
-    textAlign       : 'center',
-    flex            : 1,
-    marginLeft      : 20,
-    marginRight     : 20,
-    borderRadius    : 5,
-    shadowColor     : '#000000',
-    shadowOffset    : {
-      width  : 1,
-      height : 1
+    
+    container: {
+        marginTop : 30,
+        backgroundColor : 'gray',
     },
-    shadowRadius  : 5,
-    shadowOpacity : 0.4
-  },
-  text: {
-    textAlign   : 'center', 
-    color       : 'gray', 
-    fontSize    : 20, 
-    marginTop   : 30
-  },
-  error: {
-    textAlign   : 'center', 
-    color       : 'red', 
-    paddingTop  : 10
-  }
+    
+    keyboardContainer: {
+        justifyContent : 'center',
+        alignItems : 'center',
+    },
+    
+    keyContainer: {
+        width : "27%",
+        aspectRatio : 1,
+        margin : 3,
+        backgroundColor : 'rgba(0, 0, 0, 0.1)',
+        borderRadius : 100,
+    },
+    
+    touch: {
+        flex: 1,
+        justifyContent : 'center',
+        alignItems : 'center',
+    },
+    
+    fontSize: {
+        fontSize : 27,
+    },
+    
+    keyboardListWrapper: {
+        justifyContent : "space-around",
+    },
+    
+    pinContainer : {
+        flexDirection : "row",
+        justifyContent : 'center',
+        alignItems : 'center',
+        marginBottom : 40,
+    },
+    
+    pinElement: {
+        margin : 10,
+    },
+    
+    pinElementFont: {
+        fontSize : 30,
+    },
+    
+    pinListWrapper: {
+        justifyContent : "center",
+    },
 });
-
-

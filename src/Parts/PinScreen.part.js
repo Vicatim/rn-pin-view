@@ -2,12 +2,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Animated, FlatList } from 'react-native';
 
+// import Style
+import { defaultStyles as styles } from "../Styles/default.style"
+
 const PinElement = ( { item, index, secure} ) => {
 	let char = "_";
 	let result = (secure == true && item !== char) ? "•" : item;
 	return(
-		<View style={{margin: 5,}}>
-			<Text style={{fontSize: 22}}
+		<View style={styles.pinElement}>
+			<Text style={styles.pinElementFont}
 			>{ result }</Text>
 		</View>
 	)
@@ -17,14 +20,13 @@ export default PinScreen = ( { pinCode, pinLength, secure } ) => {
 	return (
 		<View>
 			<View
-			style={{flexDirection: "row",justifyContent: 'center', 
-			alignItems: 'center',}}
+			style={styles.pinContainer}
 			>
 				<FlatList 
 					scrollEnabled={ false }
 					horizontal={ false }
 					vertical={ true }
-					numColumns={ pinLength }
+					numColumns={ 10 }
 					data={ pinCode }
 					renderItem={({item, index}) => <PinElement 
 						item={item}
@@ -34,7 +36,6 @@ export default PinScreen = ( { pinCode, pinLength, secure } ) => {
 					columnWrapperStyle={{justifyContent: "center",}}
 				/>
 			</View>
-			<Text>pindwqwdqwdw</Text>
 		</View>
 	);	
 } 
