@@ -2,6 +2,11 @@
   "name": "rn-pin-view",
   "version": "0.0.2",
   "private": false,
+  "main": "src/PinCode.js",
+  "repository": {
+    "url": "git@github.com:Vicatim/rn-pin-view.git",
+    "type": "git"
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
