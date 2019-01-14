@@ -20,7 +20,7 @@ const NumeralElement = ( { item, index, onPress } ) => {
 	)
 };
 
-export default Keyboard = ( {data, onPress} ) => {
+export default Keyboard = ( {data = [1,2,3,4,5,6,7,8,9,"DEL",0,"SHOW"], onPress} ) => {
 	return (
 		<View style={styles.keyboardContainer}>
 			<FlatList 

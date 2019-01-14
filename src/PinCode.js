@@ -8,6 +8,8 @@ import Keyboard from "./Parts/Keyboard.part"
 // import Style
 import { defaultStyles as styles } from "./Styles/default.style"
 
+export PinScreen from "./Parts/PinScreen.part"
+export Keyboard from "./Parts/Keyboard.part"
 export default class PinCode extends Component {
     constructor(props){
         super(props);
@@ -15,6 +17,7 @@ export default class PinCode extends Component {
             pinCode: new Array(this.props.pinLength).fill(this.props.emptyFill),
             secure: true,
             savedPin: this.props.savedPin,
+            match: false,
         };
     }
     // Activitiy
@@ -62,12 +65,19 @@ export default class PinCode extends Component {
         }
     }
     
-    matchPin = () => {
+    matchPin = () => { 
         if ( this.props.savedPin.length === this.state.pinCode.length 
             && this.state.pinCode[this.state.pinCode.length - 1] !== this.props.emptyFill) {
-                this.arraysEquel(this.props.savedPin, this.state.pinCode) ? this.props.onSuccess() : this.props.onFailure();
+            if (this.state.match === false) {
+                if (this.arraysEquel(this.props.savedPin, this.state.pinCode)) {
+                    this.props.onSuccess();
+                    this.setState({match: true});
+                }  else {
+                    this.props.onFailure();
+                    this.setState({match: true});
+                }
+            }
         } 
-
     }
 
     arraysEquel = (a, b) => {

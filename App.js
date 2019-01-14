@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
-import PinCode from "./src/PinCode";
+import PinCode, { Keyboard } from "./src/PinCode";
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -17,10 +17,11 @@ export default class App extends Component<Props> {
             savedPin= {[1,1,1,1,1]}
             emptyFill= {"_"}
             secureFill={"•"}
-            onSuccess={ () => console.warn("123") }
-            onFailure={ () => console.warn("345") }
+            onSuccess={ () => console.warn("richtig") }
+            onFailure={ () => console.warn("falsch") }
           />
       </View>
+
     );
   }
 }
