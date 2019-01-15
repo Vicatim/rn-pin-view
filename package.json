@@ -1,6 +1,6 @@
 {
   "name": "rn-pin-view",
-  "version": "0.0.3",
+  "version": "0.9.1",
   "private": false,
   "main": "src/PinCode.js",
   "repository": {
