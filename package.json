@@ -16,6 +16,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "files": [
+    "src"
+  ],
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
