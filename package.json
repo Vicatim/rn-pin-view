@@ -12,9 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "npm": "^6.5.0",
-    "react": "16.6.0-alpha.8af6728",
-    "react-native": "0.57.4"
+    "npm": "^6.5.0"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
