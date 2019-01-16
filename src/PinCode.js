@@ -69,7 +69,7 @@ export default class PinCode extends Component {
         if ( this.props.savedPin.length === this.state.pinCode.length 
             && this.state.pinCode[this.state.pinCode.length - 1] !== this.props.emptyFill) {
             if (this.state.match === false) {
-                if (this.arraysEquel(this.props.savedPin, this.state.pinCode)) {
+                if (this.arraysEqual(this.props.savedPin, this.state.pinCode)) {
                     this.props.onSuccess();
                     this.setState({match: true});
                 }  else {
@@ -80,7 +80,7 @@ export default class PinCode extends Component {
         } 
     }
 
-    arraysEquel = (a, b) => {
+    arraysEqual = (a, b) => {
         if (a === b) return true;
         if (a == null || b == null) return false;
         if (a.length != b.length) return false;
