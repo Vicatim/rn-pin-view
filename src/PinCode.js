@@ -17,7 +17,6 @@ export default class PinCode extends Component {
             pinCode: new Array(this.props.pinLength).fill(this.props.emptyFill),
             secure: true,
             savedPin: this.props.savedPin,
-            match: false,
         };
     }
     // Activitiy
@@ -68,18 +67,22 @@ export default class PinCode extends Component {
     matchPin = () => { 
         if ( this.props.savedPin.length === this.state.pinCode.length 
             && this.state.pinCode[this.state.pinCode.length - 1] !== this.props.emptyFill) {
-            if (this.state.match === false) {
-                if (this.arraysEqual(this.props.savedPin, this.state.pinCode)) {
-                    this.props.onSuccess();
-                    this.setState({match: true});
-                }  else {
-                    this.props.onFailure();
-                    this.setState({match: true});
-                }
+
+            if (this.arraysEqual(this.props.savedPin, this.state.pinCode)) {
+                this.props.onSuccess();
+                this.resetPin();
+            }  else {
+                this.props.onFailure();
+                this.resetPin();
             }
+        
         } 
     }
-
+    resetPin = () => {
+        setTimeout(() =>
+        this.setState({
+            pinCode: new Array(this.props.pinLength).fill(this.props.emptyFill)}), 2000);
+    }
     arraysEqual = (a, b) => {
         if (a === b) return true;
         if (a == null || b == null) return false;
@@ -98,6 +101,7 @@ export default class PinCode extends Component {
                     pinCode={this.state.pinCode}
                     secure={this.state.secure}
                     secureFill={this.props.secureFill}
+                    emptyFill={this.props.emptyFill}
                 />
                 <Keyboard 
                     data={this.props.data}

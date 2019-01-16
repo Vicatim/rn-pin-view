@@ -5,9 +5,8 @@ import { View, Text, StyleSheet, Animated, FlatList } from 'react-native';
 // import Style
 import { defaultStyles as styles } from "../Styles/default.style"
 
-const PinElement = ( { item, index, secure, secureFill} ) => {
-	let char = "_";
-	let result = (secure == true && item !== char) ? secureFill : item;
+const PinElement = ( { item, index, secure, secureFill, emptyFill} ) => {
+	let result = (secure == true && item !== emptyFill) ? secureFill : item;
 	return(
 		<View style={styles.pinElement}>
 			<Text style={styles.pinElementFont}
@@ -16,7 +15,7 @@ const PinElement = ( { item, index, secure, secureFill} ) => {
 	)
 };
 
-export default PinScreen = ( { pinCode, pinLength, secure, secureFill } ) => {
+export default PinScreen = ( { pinCode, pinLength, secure, secureFill, emptyFill } ) => {
 	return (
 		<View>
 			<View
@@ -33,6 +32,7 @@ export default PinScreen = ( { pinCode, pinLength, secure, secureFill } ) => {
 						index={index}
 						secure={secure}
 						secureFill={secureFill}
+						emptyFill={emptyFill}
 					/> }
 					columnWrapperStyle={{justifyContent: "center",}}
 				/>
